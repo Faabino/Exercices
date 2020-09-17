@@ -83,14 +83,28 @@ typeOfGame();
 
 //Score Human vs AI
 
+const restart = () => {
+  reader.question(`Replay? Yes: "y" or No: "n"\n`, (answer) => {
+    if (answer !== answer.toLowerCase("y") || answer !== answer.toLowerCase("n")) {
+      console.log(`Type "y" or "n"\n`);
+      restart();
+    } else if (answer === answer.toLowerCase("y")) {
+      clear();
+      typeOfGame();
+    } else if (answer === answer.toLowerCase("n")) {
+      reader.close();
+    }
+  });
+}
+
 const score = () => {
   console.log(`Player ${playerScore} - ${aiScore} AI\n`);
   if (playerScore === 2) {
     console.log("gg.");
-    reader.close();
+    restart();
   } else if (aiScore === 2) {
     console.log("EZ PZ MATE")
-    reader.close();
+    restart();
   } else {
     round();
   }
