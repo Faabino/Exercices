@@ -81,21 +81,23 @@ const typeOfGame = () => {
 typeOfGame();
 
 
-//Score Human vs AI
-
 const restart = () => {
   reader.question(`Replay? Yes: "y" or No: "n"\n`, (answer) => {
     if (answer !== answer.toLowerCase("y") || answer !== answer.toLowerCase("n")) {
       console.log(`Type "y" or "n"\n`);
       restart();
-    } else if (answer === answer.toLowerCase("y")) {
+    } else if (answer === "y") {
       clear();
       typeOfGame();
-    } else if (answer === answer.toLowerCase("n")) {
+    } else if (answer === "n") {
+      clear();
       reader.close();
     }
   });
 }
+
+
+//Score Human vs AI
 
 const score = () => {
   console.log(`Player ${playerScore} - ${aiScore} AI\n`);
