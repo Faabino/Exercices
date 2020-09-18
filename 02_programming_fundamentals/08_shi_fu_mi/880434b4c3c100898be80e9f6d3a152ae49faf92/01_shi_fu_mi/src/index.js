@@ -156,16 +156,17 @@ const round = () => {
   });
 }
 
+
 //Score Human vs Human
 
 const scoreHuman = () => {
   console.log(`Player 1 : ${player1} - ${player2} : Player 2\n`);
   if (player1 === 2) {
     console.log("Player 1 Win");
-    reader.close();
+    restart();
   } else if (player2 === 2) {
     console.log("Player 2 Win")
-    reader.close();
+    restart();
   } else {
     playerVsPlayer();
   }
