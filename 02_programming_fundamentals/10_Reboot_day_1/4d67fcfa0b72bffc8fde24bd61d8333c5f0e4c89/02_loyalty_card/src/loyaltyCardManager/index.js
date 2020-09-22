@@ -11,14 +11,17 @@ const getCustomerInfo = () => {
         ask("What's your birth date? ex: 00/00/0000", (birthDate) => {
           ask("What's your city?", (city) => {
             ask("What's your country?", (country) => {
-              customer.createCustomer({
+              const customerData = {
                 firstName,
                 lastName,
                 email,
                 birthDate,
-                city,
-                country,
-              });
+                address: {
+                  city,
+                  country,
+                },
+              };
+              customer.create(customerData);
               console.log("Customer added successfully!\n");
               loyaltyCardManager(R);
             });
@@ -28,6 +31,23 @@ const getCustomerInfo = () => {
     });
   });
 };
+
+const chooseCustomer = () => {
+  console.clear();
+  const customers = customer.getAll();
+  const fullNames = customers.map((customer) => customer.fullName());
+  console.log(fullNames);
+  display.displayMenu(fullNames);
+  ask("Choose a customer", (index) => {
+    const customer = customers[index - 1];
+    display.displayCustomer(customer);
+    loyaltyCardManager(R);
+  });
+};
+
+// const customerActions = () => {
+//   display.displayMenu(["Add customer", "Access customer data", "Quit"]);
+// };
 
 export default function loyaltyCardManager(reader) {
   R = reader;
@@ -39,10 +59,10 @@ export default function loyaltyCardManager(reader) {
         getCustomerInfo(R);
         break;
       case "2":
-        console.log("Customer list");
-        loyaltyCardManager(R);
+        chooseCustomer();
         break;
       case "3":
+        console.log("Ciao!");
         reader.close();
         break;
       default:
