@@ -68,17 +68,19 @@ describe("Let the tests on arrays begin !", () => {
 
   // Create a test that checks if the array only contains String element.
   // Remember that a test is code, you are not limited to using `expect`.
-  test("Is an array that only contains strings", () => {
+  test.only("Is an array that only contains strings", () => {
     expect.assertions(1);
 
     function arrayOfStrings(array: string[]): boolean {
+      let bool: boolean;
       for (let i = 0; i <= array.length; i++) {
         if (typeof array[i] === "string") {
-          return true;
+          bool = true;
+        } else {
+          bool = false;
         }
-        return false;
       }
-      return false;
+      return bool;
     }
 
     mockArray = [
