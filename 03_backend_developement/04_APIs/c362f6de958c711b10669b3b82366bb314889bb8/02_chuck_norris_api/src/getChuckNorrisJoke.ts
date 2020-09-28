@@ -8,7 +8,6 @@ function getChuckNorrisJoke(category: string): void {
         console.error(error);
       } else {
         const joke = JSON.parse(result);
-        // console.log(joke.value);
         console.log(joke.value);
       }
     }
