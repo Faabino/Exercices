@@ -1,21 +1,16 @@
 import * as mongo from "mongodb";
+import { Country } from "./types";
 
-type ToInsert = {
-  name: string;
-  capital: string;
-  continent: string;
-};
-
-export function insertOneCountry(db: mongo.Db): Promise<ToInsert> {
-  const toInsert = {
+export function insertOneCountry(db: mongo.Db): Promise<Country> {
+  const country = {
     name: "Japan",
     capital: "Tokyo",
     continent: "Asia",
   };
   return db
     .collection("worldAtlas")
-    .insertOne(toInsert)
+    .insertOne(country)
     .then(() => {
-      return toInsert;
+      return country;
     });
 }
