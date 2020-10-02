@@ -28,7 +28,7 @@ const testOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   connectTimeoutMS: 500,
-  serverSelectionTimeoutMS: 500
+  serverSelectionTimeoutMS: 500,
 };
 
 async function initTestDatabase(): Promise<mongoDb.MongoClient> {
@@ -55,7 +55,7 @@ describe("DB utils", () => {
     try {
       client = await initTestDatabase();
       db = client.db();
-    } catch(error) {
+    } catch (error) {
       console.log("Can't log to MongoDB Server, did you start it?");
     }
   });
@@ -66,7 +66,7 @@ describe("DB utils", () => {
         userCollection.insertMany(users);
       });
     }
-  })
+  });
   afterAll(async () => {
     if (client) {
       await client.close();
@@ -399,7 +399,7 @@ describe("DB utils", () => {
       expect(updatedUser.firstName).toBe("Jeanno");
     });
 
-    it.only("Should return a promise of the updated document", async () => {
+    it("Should return a promise of the updated document", async () => {
       const usersCollection = db.collection("users");
 
       const expectedUser = {
