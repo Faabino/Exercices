@@ -3,7 +3,7 @@ export type Game = {
   slug: string;
   summary: string;
   cover: {
-    thumbnail: stirng;
+    thumbnail: string;
     url: string;
   };
   [key: string]: unknown;

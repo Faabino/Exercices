@@ -1,8 +1,11 @@
 import React from "react";
 import axios from "axios";
+import { Platform } from "../../types/Platform.d";
+
+const defaultPlatform: Platform[] = [];
 
 const PlatformPage = (): JSX.Element => {
-  const [platforms, setPlatforms] = React.useState();
+  const [platforms, setPlatforms] = React.useState(defaultPlatform);
 
   React.useEffect(() => {
     axios("https://videogames-sparta.herokuapp.com/platforms", {
@@ -15,11 +18,22 @@ const PlatformPage = (): JSX.Element => {
       })
       .catch((error) => {
         console.error(error);
-      }),
-      [setPlatforms];
-  });
+      });
+  }, []);
 
-  return <div>{JSON.stringify(platforms)};</div>;
+  return (
+    <>
+      <select className="custom-select">
+        {platforms.map((platform) => {
+          return (
+            <option key={platform.slug} value={platform.slug}>
+              {platform.name}
+            </option>
+          );
+        })}
+      </select>
+    </>
+  );
 };
 
 export default PlatformPage;
